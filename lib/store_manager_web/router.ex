@@ -19,15 +19,21 @@ defmodule StoreManagerWeb.Router do
     live "/stores", StoreLive.Index, :index
     live "/stores/new", StoreLive.Index, :new
     live "/stores/:id/edit", StoreLive.Index, :edit
-
     live "/stores/:id", StoreLive.Show, :show
     live "/stores/:id/show/edit", StoreLive.Show, :edit
+
     live "/companies", CompanyLive.Index, :index
     live "/companies/new", CompanyLive.Index, :new
     live "/companies/:id/edit", CompanyLive.Index, :edit
-
     live "/companies/:id", CompanyLive.Show, :show
     live "/companies/:id/show/edit", CompanyLive.Show, :edit
+
+    live "/clerks", ClerkLive.Index, :index
+    live "/clerks/new", ClerkLive.Index, :new
+    live "/clerks/:id/edit", ClerkLive.Index, :edit
+    live "/clerks/:id", ClerkLive.Show, :show
+    live "/clerks/:id/show/edit", ClerkLive.Show, :edit
+
     live "/",CompanyLive.Index, :index
   end
 
