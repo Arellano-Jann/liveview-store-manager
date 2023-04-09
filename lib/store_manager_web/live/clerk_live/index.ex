@@ -1,4 +1,4 @@
-defmodule StoreManagerWeb.StoreLive.Index do
+defmodule StoreManagerWeb.ClerkLive.Index do
   use StoreManagerWeb, :live_view
 
   alias StoreManager.Business
@@ -7,7 +7,7 @@ defmodule StoreManagerWeb.StoreLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :stores, Business.list_stores())}
+    {:ok, stream(socket, :clerks, Business.list_stores())}
   end
 
   @impl true
