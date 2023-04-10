@@ -1,4 +1,4 @@
-defmodule StoreManagerWeb.StoreLive.Show do
+defmodule StoreManagerWeb.ClerkLive.Show do
   use StoreManagerWeb, :live_view
 
   alias StoreManager.Business
@@ -13,9 +13,9 @@ defmodule StoreManagerWeb.StoreLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:store, Business.get_store!(id))}
+     |> assign(:clerk, Business.get_clerk!(id))}
   end
 
-  defp page_title(:show), do: "Show Store"
-  defp page_title(:edit), do: "Edit Store"
+  defp page_title(:show), do: "Show Clerk"
+  defp page_title(:edit), do: "Edit Clerk"
 end
