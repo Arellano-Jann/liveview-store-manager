@@ -7,7 +7,7 @@ defmodule StoreManagerWeb.ClerkLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :clerks, Business.list_stores())}
+    {:ok, stream(socket, :clerks, Business.list_clerks())}
   end
 
   @impl true
@@ -17,36 +17,36 @@ defmodule StoreManagerWeb.ClerkLive.Index do
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     socket
-    |> assign(:page_title, "Edit Store")
-    |> assign(:store, Business.get_store!(id))
-    |> assign(:companies, Business.list_companies())
+    |> assign(:page_title, "Edit Clerk")
+    |> assign(:clerk, Business.get_clerk!(id))
+    |> assign(:stores, Business.list_stores())
 
   end
 
   defp apply_action(socket, :new, _params) do
     socket
-    |> assign(:page_title, "New Store")
-    |> assign(:store, %Store{})
-    |> assign(:companies, Business.list_companies())
+    |> assign(:page_title, "New Clerk")
+    |> assign(:clerk, %Clerk{})
+    |> assign(:stores, Business.list_stores())
   end
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(:page_title, "Listing Stores")
-    |> assign(:store, nil)
+    |> assign(:page_title, "Listing Clerks")
+    |> assign(:clerk, nil)
   end
 
   @impl true
-  def handle_info({StoreManagerWeb.StoreLive.FormComponent, {:saved, store}}, socket) do
-    IO.inspect(store, label: "IN HANDLE INFO")
-    {:noreply, stream_insert(socket, :stores, store |> Repo.preload(:company, force: true))}
+  def handle_info({StoreManagerWeb.CLerkLive.FormComponent, {:saved, clerk}}, socket) do
+    IO.inspect(clerk, label: "IN HANDLE INFO")
+    {:noreply, stream_insert(socket, :clerks, clerk |> Repo.preload(:store, force: true))}
   end
 
   @impl true
   def handle_event("delete", %{"id" => id}, socket) do
-    store = Business.get_store!(id)
-    {:ok, _} = Business.delete_store(store)
+    clerk = Business.get_clerk!(id)
+    {:ok, _} = Business.delete_clerk(clerk)
 
-    {:noreply, stream_delete(socket, :stores, store)}
+    {:noreply, stream_delete(socket, :clerks, clerk)}
   end
 end
