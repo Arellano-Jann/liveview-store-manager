@@ -1,6 +1,6 @@
 defmodule StoreManager.Business do
   @moduledoc """
-  The Business context.
+  The Business context.test
   """
 
   import Ecto.Query, warn: false
