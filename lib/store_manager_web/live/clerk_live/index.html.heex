@@ -1,28 +1,28 @@
 <.header>
-  Listing Stores
+  Listing Clerks
   <:actions>
-    <.link patch={~p"/stores/new"}>
-      <.button>New Store</.button>
+    <.link patch={~p"/clerks/new"}>
+      <.button>New Clerk</.button>
     </.link>
   </:actions>
 </.header>
 
 <.table
-  id="stores"
-  rows={@streams.stores}
-  row_click={fn {_id, store} -> JS.navigate(~p"/stores/#{store}") end}
+  id="clerks"
+  rows={@streams.clerks}
+  row_click={fn {_id, clerk} -> JS.navigate(~p"/clerks/#{clerk}") end}
 >
-  <:col :let={{_id, store}} label="Name"><%= store.name %></:col>
-  <:col :let={{_id,store}} label="Company"><%= store.company.name%></:col>
-  <:action :let={{_id, store}}>
+  <:col :let={{_id, clerk}} label="Name"><%= clerk.name %></:col>
+  <:col :let={{_id,clerk}} label="Company"><%= clerk.company.name%></:col>
+  <:action :let={{_id, clerk}}>
     <div class="sr-only">
-      <.link navigate={~p"/stores/#{store}"}>Show</.link>
+      <.link navigate={~p"/clerks/#{clerk}"}>Show</.link>
     </div>
-    <.link patch={~p"/stores/#{store}/edit"}>Edit</.link>
+    <.link patch={~p"/clerks/#{clerk}/edit"}>Edit</.link>
   </:action>
-  <:action :let={{id, store}}>
+  <:action :let={{id, clerk}}>
     <.link
-      phx-click={JS.push("delete", value: %{id: store.id}) |> hide("##{id}")}
+      phx-click={JS.push("delete", value: %{id: clerk.id}) |> hide("##{id}")}
       data-confirm="Are you sure?"
     >
       Delete
@@ -30,14 +30,14 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="store-modal" show on_cancel={JS.patch(~p"/stores")}>
+<.modal :if={@live_action in [:new, :edit]} id="clerk-modal" show on_cancel={JS.patch(~p"/clerks")}>
   <.live_component
-    module={StoreManagerWeb.StoreLive.FormComponent}
-    id={@store.id || :new}
+    module={StoreManagerWeb.ClerkLive.FormComponent}
+    id={@clerk.id || :new}
     title={@page_title}
     action={@live_action}
-    store={@store}
-    companies={@companies}
-    patch={~p"/stores"}
+    clerk={@clerk}
+    stores={@stores}
+    patch={~p"/clerks"}
   />
 </.modal>
