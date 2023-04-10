@@ -207,8 +207,7 @@ defmodule StoreManager.Business do
     Store.changeset(store, attrs)
   end
 
-
-
+  alias StoreManager.Business.Clerk
 
   @doc """
   Returns the list of clerks.
@@ -216,11 +215,11 @@ defmodule StoreManager.Business do
   ## Examples
 
       iex> list_clerks()
-      [%Store{}, ...]
+      [%Clerk{}, ...]
 
   """
   def list_clerks do
-    Store
+    Clerk
     |> Repo.all
     |> Repo.preload(:store)
   end
@@ -240,7 +239,8 @@ defmodule StoreManager.Business do
 
   """
   def get_clerk!(id) do
-    Repo.get!(Clerk, id) |> Repo.preload(:store)
+    Repo.get!(Clerk, id)
+    |> Repo.preload(:store)
   end
 
   @doc """
@@ -277,7 +277,6 @@ defmodule StoreManager.Business do
     clerk
     |> Clerk.changeset(attrs)
     |> Repo.update()
-    |> dbg()
   end
 
   @doc """

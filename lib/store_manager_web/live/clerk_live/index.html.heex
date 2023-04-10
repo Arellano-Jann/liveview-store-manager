@@ -12,7 +12,7 @@
   rows={@streams.clerks}
   row_click={fn {_id, clerk} -> JS.navigate(~p"/clerks/#{clerk}") end}
 >
-  <:col :let={{_id, clerk}} label="Name"><%= clerk.name %></:col>
+  <:col :let={{_id, clerk}} label="Last name"><%= clerk.last_name %></:col>
   <:col :let={{_id,clerk}} label="Store"><%= clerk.store.name%></:col>
   <:action :let={{_id, clerk}}>
     <div class="sr-only">
@@ -39,5 +39,6 @@
     clerk={@clerk}
     stores={@stores}
     patch={~p"/clerks"}
-  />
+  /> 
+  <%!-- the above passes the parameters to the live_component --%>
 </.modal>

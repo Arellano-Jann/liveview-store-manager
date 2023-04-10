@@ -3,7 +3,6 @@ defmodule StoreManagerWeb.ClerkLive.FormComponent do
 
   alias StoreManager.Business
 
-
   @impl true
   def render(assigns) do
     ~H"""
@@ -12,6 +11,7 @@ defmodule StoreManagerWeb.ClerkLive.FormComponent do
         <%= @title %>
         <:subtitle>Use this form to manage clerk records in your database.</:subtitle>
       </.header>
+
       <.simple_form
         for={@form}
         id="clerk-form"
@@ -19,7 +19,7 @@ defmodule StoreManagerWeb.ClerkLive.FormComponent do
         phx-change="validate"
         phx-submit="save"
       >
-        <.input field={@form[:name]} type="text" label="Name" />
+        <.input field={@form[:last_name]} type="text" label="Last name" />
         <.input field={@form[:store_id]} type="select" options={Enum.map(@stores, &({&1.name, &1.id}))}/>
         <:actions>
           <.button phx-disable-with="Saving...">Save Clerk</.button>

@@ -7,6 +7,7 @@ defmodule StoreManager.Business.Company do
   schema "companies" do
     field :name, :string
     has_many :stores, Store
+
     timestamps()
   end
 

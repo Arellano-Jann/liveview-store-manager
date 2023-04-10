@@ -1,12 +1,11 @@
 defmodule StoreManager.Business.Clerk do
   use Ecto.Schema
   import Ecto.Changeset
-
-  alias StoreManager.Business.Company
+  alias StoreManager.Business.Store
 
   schema "clerks" do
-    field :name, :string
-    belongs_to :company, Company
+    field :last_name, :string
+    belongs_to :store, Store
 
     timestamps()
   end
@@ -14,7 +13,7 @@ defmodule StoreManager.Business.Clerk do
   @doc false
   def changeset(clerk, attrs) do
     clerk
-    |> cast(attrs, [:name, :company_id])
-    |> validate_required([:name, :company_id])
+    |> cast(attrs, [:last_name, :store_id])
+    |> validate_required([:last_name, :store_id])
   end
 end
