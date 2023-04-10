@@ -9,7 +9,7 @@
 </.header>
 
 <.list>
-  <:item title="Name"><%= @clerk.name %></:item>
+  <:item title="Last name"><%= @clerk.last_name %></:item>
   <%!-- might need something here like (from company)
   <:item :if={@company.stores} title="Stores">
     <%= Enum.map(@company.stores, &("#{&1.name}")) |> Enum.join(", ") %>
@@ -26,7 +26,17 @@
     title={@page_title}
     action={@live_action}
     clerk={@clerk}
-    stores={@stores}
     patch={~p"/clerks/#{@clerk}"}
   />
+
+  <%!-- <.live_component
+    module={StoreManagerWeb.ClerkLive.FormComponent}
+    id={@clerk.id}
+    title={@page_title}
+    action={@live_action}
+    clerk={@clerk}
+    stores={@stores}
+    patch={~p"/clerks/#{@clerk}"}
+  /> --%>
+
 </.modal>
