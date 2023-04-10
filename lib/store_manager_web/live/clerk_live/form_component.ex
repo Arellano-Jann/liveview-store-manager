@@ -1,4 +1,4 @@
-defmodule StoreManagerWeb.StoreLive.FormComponent do
+defmodule StoreManagerWeb.ClerkLive.FormComponent do
   use StoreManagerWeb, :live_component
 
   alias StoreManager.Business
@@ -10,19 +10,19 @@ defmodule StoreManagerWeb.StoreLive.FormComponent do
     <div>
       <.header>
         <%= @title %>
-        <:subtitle>Use this form to manage store records in your database.</:subtitle>
+        <:subtitle>Use this form to manage clerk records in your database.</:subtitle>
       </.header>
       <.simple_form
         for={@form}
-        id="store-form"
+        id="clerk-form"
         phx-target={@myself}
         phx-change="validate"
         phx-submit="save"
       >
         <.input field={@form[:name]} type="text" label="Name" />
-        <.input field={@form[:company_id]} type="select" options={Enum.map(@companies, &({&1.name, &1.id}))}/>
+        <.input field={@form[:store_id]} type="select" options={Enum.map(@stores, &({&1.name, &1.id}))}/>
         <:actions>
-          <.button phx-disable-with="Saving...">Save Store</.button>
+          <.button phx-disable-with="Saving...">Save Clerk</.button>
         </:actions>
       </.simple_form>
     </div>
@@ -30,8 +30,8 @@ defmodule StoreManagerWeb.StoreLive.FormComponent do
   end
 
   @impl true
-  def update(%{store: store} = assigns, socket) do
-    changeset = Business.change_store(store)
+  def update(%{clerk: clerk} = assigns, socket) do
+    changeset = Business.change_clerk(clerk)
 
     {:ok,
      socket
@@ -40,27 +40,27 @@ defmodule StoreManagerWeb.StoreLive.FormComponent do
   end
 
   @impl true
-  def handle_event("validate", %{"store" => store_params}, socket) do
+  def handle_event("validate", %{"clerk" => clerk_params}, socket) do
     changeset =
-      socket.assigns.store
-      |> Business.change_store(store_params)
+      socket.assigns.clerk
+      |> Business.change_clerk(clerk_params)
       |> Map.put(:action, :validate)
 
     {:noreply, assign_form(socket, changeset)}
   end
 
-  def handle_event("save", %{"store" => store_params}, socket) do
-    save_store(socket, socket.assigns.action, store_params)
+  def handle_event("save", %{"clerk" => clerk_params}, socket) do
+    save_clerk(socket, socket.assigns.action, clerk_params)
   end
 
-  defp save_store(socket, :edit, store_params) do
-    case Business.update_store(socket.assigns.store, store_params) do
-      {:ok, store} ->
-        notify_parent({:saved, store})
+  defp save_clerk(socket, :edit, clerk_params) do
+    case Business.update_clerk(socket.assigns.clerk, clerk_params) do
+      {:ok, clerk} ->
+        notify_parent({:saved, clerk})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Store updated successfully")
+         |> put_flash(:info, "Clerk updated successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -68,14 +68,14 @@ defmodule StoreManagerWeb.StoreLive.FormComponent do
     end
   end
 
-  defp save_store(socket, :new, store_params) do
-    case Business.create_store(store_params) do
-      {:ok, store} ->
-        notify_parent({:saved, store})
+  defp save_clerk(socket, :new, clerk_params) do
+    case Business.create_clerk(clerk_params) do
+      {:ok, clerk} ->
+        notify_parent({:saved, clerk})
 
         {:noreply,
          socket
-         |> put_flash(:info, "Store created successfully")
+         |> put_flash(:info, "Clerk created successfully")
          |> push_patch(to: socket.assigns.patch)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
