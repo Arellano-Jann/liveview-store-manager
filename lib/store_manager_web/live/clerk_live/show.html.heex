@@ -10,7 +10,7 @@
 
 <.list>
   <:item title="Name"><%= @clerk.name %></:item>
-  <%!-- might need something here like 
+  <%!-- might need something here like (from company)
   <:item :if={@company.stores} title="Stores">
     <%= Enum.map(@company.stores, &("#{&1.name}")) |> Enum.join(", ") %>
   </:item>

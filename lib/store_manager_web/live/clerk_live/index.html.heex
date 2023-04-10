@@ -13,7 +13,7 @@
   row_click={fn {_id, clerk} -> JS.navigate(~p"/clerks/#{clerk}") end}
 >
   <:col :let={{_id, clerk}} label="Name"><%= clerk.name %></:col>
-  <:col :let={{_id,clerk}} label="Company"><%= clerk.company.name%></:col>
+  <:col :let={{_id,clerk}} label="Store"><%= clerk.store.name%></:col>
   <:action :let={{_id, clerk}}>
     <div class="sr-only">
       <.link navigate={~p"/clerks/#{clerk}"}>Show</.link>
