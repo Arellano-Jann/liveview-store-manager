@@ -1,5 +1,20 @@
 # StoreManager
 
+changed files:
+
+store_manager:
+business/company.ex # schemas
+business/store.ex
+business.ex # context file
+
+store_manager_web:
+live/store_live/index.ex # 3
+live/store_live/form_component.ex # 1 (select button)
+live/store_live/*.html.heex # 1 (pass in to form component on the bottom of file) (other changes that can be shown on the screen if wanter)
+live/company_live
+
+router.ex
+
 To start your Phoenix server:
 
   * Run `mix setup` to install and setup dependencies
